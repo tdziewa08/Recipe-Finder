@@ -1,9 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from "./components/Home.jsx"
+import IngredientList from "./components/IngredientList.jsx"
 
 export default function App() {
   return (
-    <h1>TESTNG</h1>
+    <>
+      <Home />
+      <IngredientList />
+    </>
   )
 }
 
