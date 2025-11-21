@@ -33,13 +33,13 @@ body {
 
 .ingredient-input-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
 .input-section {
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -55,6 +55,8 @@ body {
 }
 
 .ingredient-input > span {
+  width: 100px;
+  text-align: center;
   font-weight: bold;
   font-size: 1.25rem;
 }
@@ -68,11 +70,20 @@ body {
   padding: 1em;
 }
 
+.ingredient-input:nth-child(2) > input {
+  border-radius: .5em 0 0 .5em;
+}
+
 .ingredient-input > select {
+  border: 2px solid black;
+  border-left: none;
+  border-radius: 0 .5em .5em 0;
+  text-align: center;
   padding: 1em;
 }
 
 .ingredient-input-container > button {
+  width: 100%;
   border: 2px solid black;
   border-radius: .5em;
   background-color: green;
