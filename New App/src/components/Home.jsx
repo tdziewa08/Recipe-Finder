@@ -1,28 +1,34 @@
 import React from "react"
 import IngredientList from "./IngredientList"
+import { nanoid } from "nanoid"
 
 export default function Home() {
 
     const [myIngredients, setMyIngredients] = React.useState([])
-    const [ingredientInput, setIngredientInput] = React.useState("")
-    const [amountInput, setAmounttInput] = React.useState("")
-    const [selectedUnit, setSelectedUnit] = React.useState("")
+    const [ingredient, setIngredient] = React.useState("")
+    const [amount, setAmount] = React.useState("")
+    const [unit, setUnit] = React.useState("cups")
 
     function addItem() {
-        if(ingredientInput || amountInput)
+        if(ingredient || amount)
         {
             let newestItem = {}
             newestItem = {
-                ingredient: ingredientInput,
-                amount: amountInput,
-                unit: selectedUnit    
+                id: nanoid(),
+                ingredient: ingredient, //maybe add the capitalizing of the first letter functionality to here...
+                amount: amount,
+                unit: unit    
             }
-            setMyIngredients(prevArray => [...prevArray, newestItem])
-            setIngredientInput("")
-            setAmounttInput("")
-            setSelectedUnit("")
+            setMyIngredients(prevArray => [newestItem, ...prevArray])
+            setIngredient("")
+            setAmount("")
+            setUnit("cups")
         }
-        
+    }
+
+    function removeItem(id) {
+        const newIngredients = myIngredients.filter(item => item.id !== id)
+        setMyIngredients(newIngredients)
     }
 
     console.log(myIngredients)
@@ -37,8 +43,8 @@ export default function Home() {
                         <div className="ingredient-input">
                             <span>Ingredient</span>
                             <input
-                                value={ingredientInput}
-                                onChange={(e) => setIngredientInput(e.target.value)}
+                                value={ingredient}
+                                onChange={(e) => setIngredient(e.target.value)}
                                 type="text"
                                 placeholder="E.g Broccoli"
                             />
@@ -46,18 +52,20 @@ export default function Home() {
                         <div className="ingredient-input">
                             <span>Amount</span>
                             <input
-                                value={amountInput}
-                                onChange={(e) => setAmounttInput(e.target.value)}
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
                                 type="text"
                                 placeholder="E.g 4"
                             />
-                            <select value={selectedUnit} onChange={(e) => setSelectedUnit(e.target.value)}>
-                                <option>cups</option>
-                                <option>ounces</option>
-                                <option>fluid ounces</option>
-                                <option>grams</option>
-                                <option>pounds</option>
-                                <option>units</option>
+                            <select value={unit} onChange={(e) => setUnit(e.target.value)}>
+                                <option value="cups" selected>cups</option>
+                                <option value="oz" >oz</option>
+                                <option value="fl oz" >fl oz</option>
+                                <option value="grams" >grams</option>
+                                <option value="pounds" >pounds</option>
+                                <option value="units" >units</option>
+                                <option value="teaspoons" >teaspoons</option>
+                                <option value="tablespoons" >tablespoons</option>
                             </select>
                         </div>
                     </div>
@@ -66,6 +74,7 @@ export default function Home() {
             </div>
             <IngredientList
                 list={myIngredients}
+                removeItem={removeItem}
             />
         </>
     )

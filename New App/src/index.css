@@ -108,3 +108,27 @@ body {
   font-weight: bold;
   margin-block: .25em;
 }
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  font-weight: bold;
+}
+
+.ingredient > span:nth-child(1) {
+  
+}
+
+.ingredient > span:nth-child(2) {
+  color: rgb(199, 15, 15);
+  font-size: small;
+  font-style: italic;
+  /* margin-left: 5em; */
+  cursor: pointer;
+}
+
+.ingredient > span:nth-child(2):hover {
+  opacity: .5;
+}
