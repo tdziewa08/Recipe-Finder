@@ -1,6 +1,6 @@
 import React from "react"
-import IngredientList from "./IngredientList"
 import { nanoid } from "nanoid"
+import IngredientList from "./IngredientList"
 
 export default function Home() {
 

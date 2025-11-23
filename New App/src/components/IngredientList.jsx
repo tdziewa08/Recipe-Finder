@@ -14,6 +14,7 @@ export default function IngredientList(props) {
         <div className="ingredient-list-container">
             <h2>Your Ingredients</h2>
             {theIngredients}
+            {theIngredients.length > 0 && <button>Generate Recipe</button>}
         </div>
     )
 }
