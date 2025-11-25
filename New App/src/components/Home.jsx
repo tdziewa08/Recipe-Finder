@@ -1,6 +1,10 @@
 import React from "react"
 import { nanoid } from "nanoid"
 import IngredientList from "./IngredientList"
+import { findRecipe } from "../data/index.js"
+import { subIngredients } from "../data/index.js"
+import { recipes } from "../data/recipes.js"
+import { substitutions } from "../data/substitutions.js"
 
 export default function Home() {
 
@@ -75,6 +79,10 @@ export default function Home() {
             <IngredientList
                 list={myIngredients}
                 removeItem={removeItem}
+                findRecipe={findRecipe}
+                subIngredients={subIngredients}
+                recipes={recipes}
+                substitutions={substitutions}
             />
         </>
     )
