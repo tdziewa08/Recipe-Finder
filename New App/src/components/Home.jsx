@@ -13,6 +13,18 @@ export default function Home() {
     const [amount, setAmount] = React.useState("")
     const [unit, setUnit] = React.useState("cups")
 
+    const [matchingRecipes, setMatchingRecipes] = React.useState([])
+    const [expandedIngredients, setExpandedIngredients] = React.useState([])
+
+    const extraIngredients = subIngredients(myIngredients, substitutions)
+    //const filteredRecipes = findRecipe(expandedIngredients, recipes)
+
+    console.log(extraIngredients)
+
+    setExpandedIngredients(extraIngredients)
+    console.log("STATE VALUE:  " + expandedIngreditents)
+    //console.log(filteredRecipes)
+
     function addItem() {
         if(ingredient || amount)
         {
@@ -83,6 +95,7 @@ export default function Home() {
                 subIngredients={subIngredients}
                 recipes={recipes}
                 substitutions={substitutions}
+                expandedIngredients={expandedIngredients}
             />
         </>
     )
