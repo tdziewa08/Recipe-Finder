@@ -21,8 +21,6 @@ function subIngredients(ingredientArr, substitutionsObj) {
 }
 
 function findRecipe(ingredientArr, recipeArr) {
-    console.log("inside the findRecipe function!")
-    
     // Single filter method - directly on recipes
     const matchingRecipes = recipeArr.filter(recipe => {
         // Check if user has ANY ingredient this recipe needs
@@ -32,7 +30,7 @@ function findRecipe(ingredientArr, recipeArr) {
         })
     })
 
-    //console.log("Matching recipes:", matchingRecipes)
+    console.log("Matching recipes:", matchingRecipes)
     return matchingRecipes
 }
 

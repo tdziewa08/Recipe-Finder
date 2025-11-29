@@ -1,6 +1,7 @@
 import React from "react"
 import { nanoid } from "nanoid"
 import IngredientList from "./IngredientList"
+import RecipeCard from "./RecipeCard"
 import { findRecipe } from "../data/index.js"
 import { subIngredients } from "../data/index.js"
 import { recipes } from "../data/recipes.js"
@@ -16,13 +17,13 @@ export default function Home() {
     const [matchingRecipes, setMatchingRecipes] = React.useState([])
     const [expandedIngredients, setExpandedIngredients] = React.useState([])
 
-    const extraIngredients = subIngredients(myIngredients, substitutions)
+    
     //const filteredRecipes = findRecipe(expandedIngredients, recipes)
 
-    console.log(extraIngredients)
+    //console.log(expandedIngredients)
 
-    setExpandedIngredients(extraIngredients)
-    console.log("STATE VALUE:  " + expandedIngreditents)
+    console.log("STATE VALUE:  " + expandedIngredients)
+    
     //console.log(filteredRecipes)
 
     function addItem() {
@@ -35,7 +36,10 @@ export default function Home() {
                 amount: amount,
                 unit: unit    
             }
-            setMyIngredients(prevArray => [newestItem, ...prevArray])
+            const newestArray = [newestItem, ...myIngredients]
+            setMyIngredients(newestArray)
+            const extraIngredients = subIngredients(newestArray, substitutions)
+            setExpandedIngredients(extraIngredients)
             setIngredient("")
             setAmount("")
             setUnit("cups")
@@ -45,6 +49,16 @@ export default function Home() {
     function removeItem(id) {
         const newIngredients = myIngredients.filter(item => item.id !== id)
         setMyIngredients(newIngredients)
+        
+        // Recalculate expanded ingredients with the updated ingredients list
+        const updatedExpandedIngredients = subIngredients(newIngredients, substitutions)
+        setExpandedIngredients(updatedExpandedIngredients)
+    }
+
+    function handleFindRecipe() {
+        console.log("inside handleFindRecipe function")
+        const foundRecipes = findRecipe(myIngredients, recipes)
+        setMatchingRecipes(foundRecipes)
     }
 
     console.log(myIngredients)
@@ -91,12 +105,13 @@ export default function Home() {
             <IngredientList
                 list={myIngredients}
                 removeItem={removeItem}
-                findRecipe={findRecipe}
-                subIngredients={subIngredients}
-                recipes={recipes}
-                substitutions={substitutions}
-                expandedIngredients={expandedIngredients}
             />
+            {myIngredients.length > 0 && <button onClick={handleFindRecipe}>Find Recipes</button>}
+            {matchingRecipes.length > 0 &&
+            <RecipeCard 
+                recipes={matchingRecipes}
+                allIngredients={myIngredients}
+            />}
         </>
     )
 }
