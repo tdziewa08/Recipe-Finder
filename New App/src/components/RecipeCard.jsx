@@ -2,9 +2,10 @@ export default function RecipeCard(props) {
 
     const theRecipes = props.recipes.map(item => {
         return (
-            <div key={item.id} className="ingredient-list-container">
+            <div key={item.id} className="recipe-card">
                 <h3>{item.title}</h3>
-                <section>
+                <section className="ingredients-list">
+                    <p>Ingredients</p>
                     {item.ingredients.map((ing, index) => (
                         <span key={index}>{ing}, </span>
                     ))}
