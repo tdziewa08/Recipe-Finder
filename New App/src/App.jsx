@@ -41,9 +41,9 @@ NEW PSEUDO...
   Return top 3-5 best matching recipes to display
 
   Step 4: Recipe Results Display
-  Show recipe title, cooking time, and cuisine type
+  Show recipe title, cooking time, and cuisine type✅
   Display which ingredients user has vs which they need to buy
-  List step-by-step cooking instructions
+  List step-by-step cooking instructions✅
   Allow user to save or favorite recipes for later
 
   Step 5: Shopping List Generation

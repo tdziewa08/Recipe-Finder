@@ -22,7 +22,7 @@ export const recipes = [
     {
         id: 3,
         title: "Beef Taco Bowl",
-        ingredients: ["ground beef", "rice", "onions", "bell peppers", "cheese", "salsa", "oil"],
+        ingredients: ["ground beef", "rice", "onions", "bell peppers", "cheese", "salsa", "oil", "fecal notes"],
         instructions: ["Cook rice according to package", "Brown ground beef with onions", "Add peppers and cook 3 minutes", "Serve over rice with cheese and salsa"],
         cookTime: 20,
         servings: 4,
@@ -54,7 +54,7 @@ export const recipes = [
         title: "Chicken Pasta Salad",
         ingredients: ["chicken breast", "vegetables", "dressing", "pasta", "chick peas"],
         instructions: ["Grill and dice chicken", "Boil pasta", "Chop vegetables", "Combine chicken, pasta, vegetables, chick peas, and dressing"],
-        cooktime: 25,
+        cookTime: 25,
         servings: 2,
         cuisine: "Mediterranean",
         difficulty: "easy"

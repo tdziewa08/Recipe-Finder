@@ -6,11 +6,29 @@ export default function RecipeCard(props) {
                 <h3>{item.title}</h3>
                 <section className="ingredients-list">
                     <p>Ingredients</p>
-                    {item.ingredients.map((ing, index) => (
-                        <span key={index}>{ing}, </span>
-                    ))}
+                    {item.ingredients.map((ing, index) => {
+
+                        const hasIngredient = props.listIngredients.some(item => item.ingredient === ing)
+
+                        if(hasIngredient)
+                        {
+                            // console.log("On the List")
+                            return <span key={index}>{ing}, </span>
+                        }
+                        else if(props.allIngredients.includes(ing))
+                        {
+                            // console.log("Substitute on List")
+                            return <span className="blue" key={index}>{ing}, </span>
+                        }
+                        else
+                        {
+                            // console.log("Its not on either and should be red")
+                            return <span className="red" key={index}>{ing}, </span>
+                        }
+                    })}
                 </section>
-                <section>
+                <section className="instructions-list">
+                    <p>Instructions</p>
                     {item.instructions.map((ins, index) => (
                         <p key={index}>{index + 1}. {ins}</p>
                     ))}

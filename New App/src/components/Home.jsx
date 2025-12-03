@@ -17,15 +17,6 @@ export default function Home() {
     const [matchingRecipes, setMatchingRecipes] = React.useState([])
     const [expandedIngredients, setExpandedIngredients] = React.useState([])
 
-    
-    //const filteredRecipes = findRecipe(expandedIngredients, recipes)
-
-    //console.log(expandedIngredients)
-
-    console.log("STATE VALUE:  " + expandedIngredients)
-    
-    //console.log(filteredRecipes)
-
     function addItem() {
         if(ingredient || amount)
         {
@@ -61,7 +52,8 @@ export default function Home() {
         setMatchingRecipes(foundRecipes)
     }
 
-    console.log(myIngredients)
+    console.log("My Ingredients" + myIngredients)
+    console.log("Expanded Ingredients" + expandedIngredients)
 
     return (
         <>
@@ -112,7 +104,8 @@ export default function Home() {
             {matchingRecipes.length > 0 &&
             <RecipeCard 
                 recipes={matchingRecipes}
-                allIngredients={myIngredients}
+                listIngredients={myIngredients}
+                allIngredients={expandedIngredients}
             />}
         </>
     )
