@@ -173,8 +173,19 @@ body {
   padding: 1em;
 }
 
-.recipe-card > h3 {
-  /* align-self: center; */
+.recipe-card > h3 > a {
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  margin-left: 1em;
+}
+
+.recipe-tags {
+  margin: 0;
+}
+
+.recipe-tags > span:nth-child(1) {
+  margin-right: 2em;
 }
 
 .ingredients-list > p {

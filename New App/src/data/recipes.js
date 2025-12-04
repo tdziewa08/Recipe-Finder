@@ -7,7 +7,7 @@ export const recipes = [
         cookTime: 15,
         servings: 4,
         cuisine: "Asian",
-        difficulty: "easy"
+        difficulty: "Easy"
     },
     {
         id: 2,
@@ -17,17 +17,17 @@ export const recipes = [
         cookTime: 12,
         servings: 4,
         cuisine: "Italian",
-        difficulty: "easy"
+        difficulty: "Easy"
     },
     {
         id: 3,
         title: "Beef Taco Bowl",
-        ingredients: ["ground beef", "rice", "onions", "bell peppers", "cheese", "salsa", "oil", "fecal notes"],
+        ingredients: ["ground beef", "rice", "onions", "bell peppers", "cheese", "salsa", "oil"],
         instructions: ["Cook rice according to package", "Brown ground beef with onions", "Add peppers and cook 3 minutes", "Serve over rice with cheese and salsa"],
         cookTime: 20,
         servings: 4,
         cuisine: "Mexican",
-        difficulty: "easy"
+        difficulty: "Easy"
     },
     {
         id: 4,
@@ -37,7 +37,7 @@ export const recipes = [
         cookTime: 25,
         servings: 4,
         cuisine: "Indian",
-        difficulty: "medium"
+        difficulty: "Medium"
     },
     {
         id: 5,
@@ -47,7 +47,7 @@ export const recipes = [
         cookTime: 8,
         servings: 2,
         cuisine: "American",
-        difficulty: "easy"
+        difficulty: "Easy"
     },
     {
         id: 6,
@@ -57,6 +57,6 @@ export const recipes = [
         cookTime: 25,
         servings: 2,
         cuisine: "Mediterranean",
-        difficulty: "easy"
+        difficulty: "Easy"
     }
 ]

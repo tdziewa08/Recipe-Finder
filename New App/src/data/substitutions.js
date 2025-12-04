@@ -33,5 +33,4 @@ export const substitutions = {
     "herbs": ["dried herbs", "herb paste", "fresh parsley"],
     "salsa": ["pico de gallo", "hot sauce", "diced tomatoes"],
     "dressing": ["olive oil + lemon", "tahini dressing", "vinaigrette"],
-    "nastiness": ["poop", "fecal notes"] //gotta question why this only works one way, not when fecal notes and nastiness are switched in place here, BUT the recipe calls for fecal notes still...
 }

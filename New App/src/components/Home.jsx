@@ -48,7 +48,7 @@ export default function Home() {
 
     function handleFindRecipe() {
         console.log("inside handleFindRecipe function")
-        const foundRecipes = findRecipe(myIngredients, recipes)
+        const foundRecipes = findRecipe(myIngredients, recipes, substitutions)
         setMatchingRecipes(foundRecipes)
     }
 
