@@ -52,6 +52,17 @@ export default function Home() {
         setMatchingRecipes(foundRecipes)
     }
 
+    function toggleFavorite(recipeId) {
+        setMatchingRecipes(prevRecipes => 
+            prevRecipes.map(recipe => {
+                return (
+                    recipe.id === recipeId 
+                        ? {...recipe, isFavorite: !recipe.isFavorite}
+                        : recipe
+                )})
+        )
+    }
+
     console.log("My Ingredients" + myIngredients)
     console.log("Expanded Ingredients" + expandedIngredients)
 
@@ -99,14 +110,22 @@ export default function Home() {
                     list={myIngredients}
                     removeItem={removeItem}
                 />
-                {myIngredients.length > 0 && <button onClick={handleFindRecipe}>Find Recipes</button>}
+                {myIngredients.length > 0 && <button id="find-recipe-btn" onClick={handleFindRecipe}>Find Recipes</button>}
             </div>
             {matchingRecipes.length > 0 &&
-            <RecipeCard 
-                recipes={matchingRecipes}
-                listIngredients={myIngredients}
-                allIngredients={expandedIngredients}
-            />}
+            <>
+                <legend>
+                    <span>🔴 Missing ingredient</span>
+                    <span>🔵 Substitute available</span> 
+                    <span>⚫ Have ingredient</span>
+                </legend>
+                <RecipeCard 
+                    recipes={matchingRecipes}
+                    listIngredients={myIngredients}
+                    allIngredients={expandedIngredients}
+                    toggleFavorite={toggleFavorite}
+                />
+            </>}
         </>
     )
 }

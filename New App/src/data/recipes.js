@@ -7,7 +7,8 @@ export const recipes = [
         cookTime: 15,
         servings: 4,
         cuisine: "Asian",
-        difficulty: "Easy"
+        difficulty: "Easy",
+        isFavorite: false
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ export const recipes = [
         cookTime: 12,
         servings: 4,
         cuisine: "Italian",
-        difficulty: "Easy"
+        difficulty: "Easy",
+        isFavorite: false
     },
     {
         id: 3,
@@ -27,7 +29,8 @@ export const recipes = [
         cookTime: 20,
         servings: 4,
         cuisine: "Mexican",
-        difficulty: "Easy"
+        difficulty: "Easy",
+        isFavorite: false
     },
     {
         id: 4,
@@ -37,7 +40,8 @@ export const recipes = [
         cookTime: 25,
         servings: 4,
         cuisine: "Indian",
-        difficulty: "Medium"
+        difficulty: "Medium",
+        isFavorite: false
     },
     {
         id: 5,
@@ -47,7 +51,8 @@ export const recipes = [
         cookTime: 8,
         servings: 2,
         cuisine: "American",
-        difficulty: "Easy"
+        difficulty: "Easy",
+        isFavorite: false
     },
     {
         id: 6,
@@ -57,6 +62,7 @@ export const recipes = [
         cookTime: 25,
         servings: 2,
         cuisine: "Mediterranean",
-        difficulty: "Easy"
+        difficulty: "Easy",
+        isFavorite: false
     }
 ]

@@ -1,3 +1,5 @@
+import { FaStar, FaRegStar } from "react-icons/fa"
+
 export default function RecipeCard(props) {
 
     const theRecipes = props.recipes.map(item => {
@@ -5,7 +7,9 @@ export default function RecipeCard(props) {
             <div key={item.id} className="recipe-card">
                 <h3>
                     {item.title}
-                    <a href="#">Favorite</a>
+                    <span className="favorite-icon">
+                        {item.isFavorite ? <FaStar onClick={() => props.toggleFavorite(item.id)}/> : <FaRegStar onClick={() => props.toggleFavorite(item.id)}/>}
+                    </span>
                 </h3>
                 <p className="recipe-tags">
                     <span>Cuisine: {item.cuisine}</span>

@@ -148,8 +148,37 @@ body {
   opacity: .5;
 }
 
+#find-recipe-btn {
+  width: 50%;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: green;
+  border-radius: .5em;
+  border: 1px solid black;
+  padding: 1em 1.5em;
+  cursor: pointer;
+}
+
+#find-recipe-btn:hover {
+  opacity: .80;
+}
 
 
+
+legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  /* background-color: whitesmoke;
+  padding: 1em; */
+  margin-top: 2em;
+}
+
+legend > span:nth-child(2) {
+  margin: 0 3em;
+}
 
 .recipe-cards-container {
   display: flex;
@@ -181,6 +210,7 @@ body {
 }
 
 .recipe-tags {
+  font-weight: bold;
   margin: 0;
 }
 
