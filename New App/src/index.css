@@ -21,6 +21,29 @@ body {
   justify-content: center;
 }
 
+.layout-container {
+  border: 1px solid purple;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.layout-container > nav {
+  border: 1px solid brown;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 50%;
+  padding: 1em;
+  column-gap: 3em;
+}
+
+.layout-container > nav > a {
+  text-decoration: none;
+}
+
 .master {
   border: 2px solid blue;
   display: flex;
@@ -164,7 +187,14 @@ body {
   opacity: .80;
 }
 
-
+.recipe-container {
+  border: 1px solid brown;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
 legend {
   display: flex;
@@ -202,11 +232,24 @@ legend > span:nth-child(2) {
   padding: 1em;
 }
 
-.recipe-card > h3 > a {
-  font-size: 1rem;
+.recipe-card > h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.favorite-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
   font-weight: 400;
-  text-decoration: none;
   margin-left: 1em;
+  cursor: pointer;
+}
+
+.favorite-icon > path {
+  height: 100%;
 }
 
 .recipe-tags {
@@ -215,7 +258,7 @@ legend > span:nth-child(2) {
 }
 
 .recipe-tags > span:nth-child(1) {
-  margin-right: 2em;
+  margin-right: 1.5em;
 }
 
 .ingredients-list > p {

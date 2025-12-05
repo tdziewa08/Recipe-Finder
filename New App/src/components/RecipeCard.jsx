@@ -8,8 +8,8 @@ export default function RecipeCard(props) {
                 <h3>
                     {item.title}
                     <span className="favorite-icon">
-                        {item.isFavorite ? <FaStar onClick={() => props.toggleFavorite(item.id)}/> : <FaRegStar onClick={() => props.toggleFavorite(item.id)}/>}
-                    </span>
+                        {(props.allAreFavorites || item.isFavorite) ? <FaStar onClick={() => props.toggleFavorite(item.id)}/> : <FaRegStar onClick={() => props.toggleFavorite(item.id)}/>
+                    }</span>
                 </h3>
                 <p className="recipe-tags">
                     <span>Cuisine: {item.cuisine}</span>

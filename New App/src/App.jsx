@@ -1,12 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from "./Layout.jsx"
 import Home from "./components/Home.jsx"
+import SavedRecipesList from "./components/SavedRecipesList.jsx"
 import IngredientList from "./components/IngredientList.jsx"
 
 export default function App() {
   return (
     <>
-      <Home />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />}/>
+            <Route path="saved" element={<SavedRecipesList />} />
+          </Route>
+        </Routes>
+      </Router>
+      
       {/* <IngredientList /> */}
     </>
   )
@@ -42,9 +52,9 @@ NEW PSEUDO...
 
   Step 4: Recipe Results Display
   Show recipe title, cooking time, and cuisine type✅
-  Display which ingredients user has vs which they need to buy🎯
+  Display which ingredients user has vs which they need to buy✅
   List step-by-step cooking instructions✅
-  Allow user to save or favorite recipes for later🎯
+  Allow user to save or favorite recipes for later✅
 
   Step 5: Shopping List Generation
   For selected recipe, identify ingredients user is missing

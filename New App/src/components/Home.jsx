@@ -1,67 +1,78 @@
 import React from "react"
+import { Link } from "react-router-dom"
+import { useOutletContext } from "react-router-dom"
 import { nanoid } from "nanoid"
 import IngredientList from "./IngredientList"
-import RecipeCard from "./RecipeCard"
-import { findRecipe } from "../data/index.js"
 import { subIngredients } from "../data/index.js"
-import { recipes } from "../data/recipes.js"
-import { substitutions } from "../data/substitutions.js"
+import RecipeCard from "./RecipeCard"
+
+import SavedRecipesList from "./SavedRecipesList"
 
 export default function Home() {
 
-    const [myIngredients, setMyIngredients] = React.useState([])
+    //const [myIngredients, setMyIngredients] = React.useState([])
+    //const [matchingRecipes, setMatchingRecipes] = React.useState([])
+    //const [savedRecipes, setSavedRecipes] = React.useState([])
+    //const [expandedIngredients, setExpandedIngredients] = React.useState([])
+
+    //local state/////////////////////////////////////////////////////////////
     const [ingredient, setIngredient] = React.useState("")
     const [amount, setAmount] = React.useState("")
     const [unit, setUnit] = React.useState("cups")
+    //////////////////////////////////////////////////////////////////////////
 
-    const [matchingRecipes, setMatchingRecipes] = React.useState([])
-    const [expandedIngredients, setExpandedIngredients] = React.useState([])
+    const {
+        myIngredients,
+        expandedIngredients,
+        matchingRecipes,
+        addItem,
+        removeItem,
+        handleFindRecipe,
+        toggleFavorite,
+    } = useOutletContext()
 
-    function addItem() {
-        if(ingredient || amount)
-        {
-            let newestItem = {}
-            newestItem = {
-                id: nanoid(),
-                ingredient: ingredient, //maybe add the capitalizing of the first letter functionality to here...
-                amount: amount,
-                unit: unit    
-            }
-            const newestArray = [newestItem, ...myIngredients]
-            setMyIngredients(newestArray)
-            const extraIngredients = subIngredients(newestArray, substitutions)
-            setExpandedIngredients(extraIngredients)
+    //local function that calls context addItem and resets form
+    function handleAddItem() {
+        const success = addItem(ingredient, amount, unit)
+        if (success) {
             setIngredient("")
             setAmount("")
             setUnit("cups")
         }
     }
 
-    function removeItem(id) {
-        const newIngredients = myIngredients.filter(item => item.id !== id)
-        setMyIngredients(newIngredients)
+
+
+
+    // function removeItem(id) {
+    //     const newIngredients = myIngredients.filter(item => item.id !== id)
+    //     setMyIngredients(newIngredients)
         
-        // Recalculate expanded ingredients with the updated ingredients list
-        const updatedExpandedIngredients = subIngredients(newIngredients, substitutions)
-        setExpandedIngredients(updatedExpandedIngredients)
-    }
+    //     // Recalculate expanded ingredients with the updated ingredients list
+    //     const updatedExpandedIngredients = subIngredients(newIngredients, substitutions)
+    //     setExpandedIngredients(updatedExpandedIngredients)
+    // }
 
-    function handleFindRecipe() {
-        console.log("inside handleFindRecipe function")
-        const foundRecipes = findRecipe(myIngredients, recipes, substitutions)
-        setMatchingRecipes(foundRecipes)
-    }
+    // function handleFindRecipe() {
+    //     console.log("inside handleFindRecipe function")
+    //     const foundRecipes = findRecipe(myIngredients, recipes, substitutions)
+    //     setMatchingRecipes(foundRecipes)
+    // }
 
-    function toggleFavorite(recipeId) {
-        setMatchingRecipes(prevRecipes => 
-            prevRecipes.map(recipe => {
-                return (
-                    recipe.id === recipeId 
-                        ? {...recipe, isFavorite: !recipe.isFavorite}
-                        : recipe
-                )})
-        )
-    }
+    // function toggleFavorite(recipeId) {
+    //     setMatchingRecipes(prevRecipes => {
+    //         const updatedRecipes = prevRecipes.map(recipe => {
+    //             return (
+    //                 recipe.id === recipeId 
+    //                     ? {...recipe, isFavorite: !recipe.isFavorite}
+    //                     : recipe
+    //         )})
+    //         const favoritedRecipes = updatedRecipes.filter(recipe => recipe.isFavorite)
+    //         setSavedRecipes(favoritedRecipes)
+    //         return updatedRecipes
+    //     })
+    // }
+    
 
     console.log("My Ingredients" + myIngredients)
     console.log("Expanded Ingredients" + expandedIngredients)
@@ -103,7 +114,7 @@ export default function Home() {
                                 </select>
                             </div>
                         </div>
-                        <button onClick={addItem}>Add Item</button>
+                        <button onClick={handleAddItem}>Add Item</button>
                     </div>
                 </div>
                 <IngredientList
@@ -113,19 +124,21 @@ export default function Home() {
                 {myIngredients.length > 0 && <button id="find-recipe-btn" onClick={handleFindRecipe}>Find Recipes</button>}
             </div>
             {matchingRecipes.length > 0 &&
-            <>
+            <div className="recipe-container">
                 <legend>
                     <span>🔴 Missing ingredient</span>
                     <span>🔵 Substitute available</span> 
                     <span>⚫ Have ingredient</span>
                 </legend>
-                <RecipeCard 
-                    recipes={matchingRecipes}
-                    listIngredients={myIngredients}
-                    allIngredients={expandedIngredients}
-                    toggleFavorite={toggleFavorite}
-                />
-            </>}
+                <>
+                    <RecipeCard 
+                        recipes={matchingRecipes}
+                        listIngredients={myIngredients}
+                        allIngredients={expandedIngredients}
+                        toggleFavorite={toggleFavorite}
+                    />
+                </>
+            </div>}
         </>
     )
 }
