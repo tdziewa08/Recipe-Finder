@@ -25,10 +25,15 @@ export default function Home() {
         myIngredients,
         expandedIngredients,
         matchingRecipes,
+        savedRecipes,
+        shoppingList,
         addItem,
         removeItem,
         handleFindRecipe,
         toggleFavorite,
+        addToShoppingList,
+        removeFromShoppingList,
+        clearShoppingList,
     } = useOutletContext()
 
     //local function that calls context addItem and resets form
@@ -136,9 +141,13 @@ export default function Home() {
                         listIngredients={myIngredients}
                         allIngredients={expandedIngredients}
                         toggleFavorite={toggleFavorite}
+                        savedRecipes={savedRecipes}
+                        onAddToShoppingList={addToShoppingList}
                     />
                 </>
             </div>}
+            
+
         </>
     )
 }

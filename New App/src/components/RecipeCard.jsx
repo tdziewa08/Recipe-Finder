@@ -3,13 +3,23 @@ import { FaStar, FaRegStar } from "react-icons/fa"
 export default function RecipeCard(props) {
 
     const theRecipes = props.recipes.map(item => {
+        // Calculate missing ingredients once, use everywhere
+        const missingIngredients = item.ingredients.filter(ing => {
+            const hasIngredient = props.listIngredients.some(item => item.ingredient === ing)
+            const hasSubstitute = props.allIngredients.includes(ing)
+            return !hasIngredient && !hasSubstitute
+        })
+
         return (
             <div key={item.id} className="recipe-card">
                 <h3>
                     {item.title}
                     <span className="favorite-icon">
-                        {(props.allAreFavorites || item.isFavorite) ? <FaStar onClick={() => props.toggleFavorite(item.id)}/> : <FaRegStar onClick={() => props.toggleFavorite(item.id)}/>
-                    }</span>
+                        {(props.allAreFavorites || (props.savedRecipes && props.savedRecipes.some(saved => saved.id === item.id)) || item.isFavorite)
+                            ? <FaStar onClick={() => props.toggleFavorite(item.id)}/>
+                            : <FaRegStar onClick={() => props.toggleFavorite(item.id)}/>
+                        }
+                    </span>
                 </h3>
                 <p className="recipe-tags">
                     <span>Cuisine: {item.cuisine}</span>
@@ -46,8 +56,17 @@ export default function RecipeCard(props) {
                 </section>
                 <p>Cook time: {item.cookTime} minutes</p>
                 <p>Servings: {item.servings}</p>
-                {/* <p>Cuisine: {item.cuisine}</p>
-                <p>Difficulty: {item.difficulty}</p> */}
+                <button 
+                    id="shopping-list-btn"
+                    onClick={() => {
+                        if (props.onAddToShoppingList && missingIngredients.length > 0)
+                        {
+                            props.onAddToShoppingList(missingIngredients, item.title)
+                        }
+                    }}
+                >
+                    Add Missing Ingredients ({missingIngredients.length})
+                </button>
             </div>
         )
     })

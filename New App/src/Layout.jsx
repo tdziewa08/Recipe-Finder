@@ -12,6 +12,7 @@ export default function Layout() {
     const [expandedIngredients, setExpandedIngredients] = React.useState([])
     const [matchingRecipes, setMatchingRecipes] = React.useState([])
     const [savedRecipes, setSavedRecipes] = React.useState([])
+    const [shoppingList, setShoppingList] = React.useState([])
     
 
     function addItem(ingredient, amount, unit) {
@@ -72,22 +73,52 @@ export default function Layout() {
         })
     }
 
+    function addToShoppingList(missingIngredients, recipeTitle) {
+        const newItems = missingIngredients.map(ingredient => ({
+            id: nanoid(),
+            ingredient,
+            recipeTitle,
+            addedDate: new Date().toLocaleDateString()
+        }))
+        
+        setShoppingList(prevList => {
+            // Avoid duplicates by checking if ingredient already exists
+            const filteredNewItems = newItems.filter(newItem => 
+                !prevList.some(existingItem => existingItem.ingredient === newItem.ingredient)
+            )
+            return [...prevList, ...filteredNewItems]
+        })
+    }
+
+    function removeFromShoppingList(id) {
+        setShoppingList(prevList => prevList.filter(item => item.id !== id))
+    }
+
+    function clearShoppingList() {
+        setShoppingList([])
+    }
+
     const sharedData = {
         myIngredients,
         expandedIngredients,
         matchingRecipes,
         savedRecipes,
+        shoppingList,
         addItem,
         removeItem,
         handleFindRecipe,
         toggleFavorite,
+        addToShoppingList,
+        removeFromShoppingList,
+        clearShoppingList,
     }
 
     return (
         <div className="layout-container">
             <nav>
                 <Link to="/">Home</Link>
-                <Link to="/saved">Favorited Recipes</Link>
+                <Link to="/saved">Favorited Recipes ({savedRecipes.length})</Link>
+                <Link to="/shopping-list">Shopping List ({shoppingList.length})</Link>
             </nav>
             <Outlet context={sharedData} />
         </div>

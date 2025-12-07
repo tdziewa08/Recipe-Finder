@@ -4,6 +4,7 @@ import Layout from "./Layout.jsx"
 import Home from "./components/Home.jsx"
 import SavedRecipesList from "./components/SavedRecipesList.jsx"
 import IngredientList from "./components/IngredientList.jsx"
+import ShoppingList from "./components/ShoppingList.jsx"
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />}/>
             <Route path="saved" element={<SavedRecipesList />} />
+            <Route path="shopping-list" element={<ShoppingList />} />
           </Route>
         </Routes>
       </Router>
@@ -23,8 +25,8 @@ export default function App() {
 }
 
 {/*
-  1. User inputs ingredients they currently have in their kitchen
-  2. App searches recipe database and filters recipes by available ingredients 
+  1. User inputs ingredients they currently have in their kitchen✅
+  2. App searches recipe database and filters recipes by available ingredients ✅
   3. System calculates "completeness score" and missing ingredients for each recipe
   4. App ranks recipes by feasibility, nutrition, and user preferences
   5. Display optimized recipe suggestions with shopping lists for missing items
@@ -57,10 +59,10 @@ NEW PSEUDO...
   Allow user to save or favorite recipes for later✅
 
   Step 5: Shopping List Generation
-  For selected recipe, identify ingredients user is missing
-  Create shopping list with missing ingredients and estimated quantities
+  For selected recipe, identify ingredients user is missing✅
+  Create shopping list with missing ingredients and estimated quantities✅
   Group ingredients by store section (produce, dairy, meat, etc.)
-  Allow user to export or print shopping list
+  Allow user to export or print shopping list✅
 
 
 */}

@@ -9,6 +9,7 @@ export default function SavedRecipesList(props) {
             expandedIngredients,
             savedRecipes,
             toggleFavorite,
+            addToShoppingList,
         } = useOutletContext()
 
 
@@ -16,17 +17,27 @@ export default function SavedRecipesList(props) {
         <div className="saved-recipes-page">
             <header>
                 <h1>My Saved Recipes</h1>
-                <Link to="/">← Back to Home</Link>
+                {/* <Link to="/">← Back to Home</Link> */}
             </header>
             
             {savedRecipes && savedRecipes.length > 0 ? (
-                <RecipeCard 
-                    recipes={savedRecipes}
-                    listIngredients={myIngredients}
-                    allIngredients={expandedIngredients}
-                    toggleFavorite={toggleFavorite}
-                    allAreFavorites={true}
-                />
+                <div className="recipe-container">
+                    <legend>
+                        <span>🔴 Missing ingredient</span>
+                        <span>🔵 Substitute available</span> 
+                        <span>⚫ Have ingredient</span>
+                    </legend>
+                    <>
+                        <RecipeCard 
+                            recipes={savedRecipes}
+                            listIngredients={myIngredients}
+                            allIngredients={expandedIngredients}
+                            toggleFavorite={toggleFavorite}
+                            allAreFavorites={true}
+                            onAddToShoppingList={addToShoppingList}
+                        />
+                    </>
+                </div>
             ) : (
                 <div className="no-saved-recipes">
                     <h2>No saved recipes yet!</h2>
