@@ -27,6 +27,7 @@ export default function Home() {
         matchingRecipes,
         savedRecipes,
         shoppingList,
+        notFound,
         addItem,
         removeItem,
         handleFindRecipe,
@@ -126,7 +127,8 @@ export default function Home() {
                     list={myIngredients}
                     removeItem={removeItem}
                 />
-                {myIngredients.length > 0 && <button id="find-recipe-btn" onClick={handleFindRecipe}>Find Recipes</button>}
+                {myIngredients.length > 0 &&<button id="find-recipe-btn" onClick={handleFindRecipe}>Find Recipes</button>}
+                {notFound && <span className="not-found-message">No recipes found</span>}
             </div>
             {matchingRecipes.length > 0 &&
             <div className="recipe-container">

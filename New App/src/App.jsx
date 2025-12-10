@@ -64,6 +64,11 @@ NEW PSEUDO...
   Group ingredients by store section (produce, dairy, meat, etc.)
   Allow user to export or print shopping list✅
 
+TROY PSEUDO
+
+Decide on implementing ingredient units or not (make add input like the sleect input if not using units)
+fix shifting navbar UI
+add media queries
 
   
 */}

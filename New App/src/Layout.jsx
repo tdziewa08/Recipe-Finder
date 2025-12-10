@@ -1,5 +1,5 @@
 import React from "react"
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, Link, useLocation } from "react-router-dom"
 import { nanoid } from "nanoid"
 import { findRecipe } from "./data/index.js"
 import { subIngredients } from "./data/index.js"
@@ -7,12 +7,20 @@ import { recipes } from "./data/recipes.js"
 import { substitutions } from "./data/substitutions.js"
 
 export default function Layout() {
+    const location = useLocation()
+
+    // Scroll to top when route changes
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location.pathname])
 
     const [myIngredients, setMyIngredients] = React.useState([])
     const [expandedIngredients, setExpandedIngredients] = React.useState([])
     const [matchingRecipes, setMatchingRecipes] = React.useState([])
     const [savedRecipes, setSavedRecipes] = React.useState([])
     const [shoppingList, setShoppingList] = React.useState([])
+    const [notFound, setNotFound] = React.useState(false)
+    const [toastMessage, setToastMessage] = React.useState('')
     
 
     function addItem(ingredient, amount, unit) {
@@ -45,7 +53,16 @@ export default function Layout() {
     function handleFindRecipe() {
         console.log("inside handleFindRecipe function")
         const foundRecipes = findRecipe(myIngredients, recipes, substitutions)
-        setMatchingRecipes(foundRecipes)
+        if(foundRecipes.length === 0)
+        {
+            setNotFound(true)
+            setMatchingRecipes([])
+        }
+        else
+        {
+            setNotFound(false)
+            setMatchingRecipes(foundRecipes)
+        }
     }
 
     function toggleFavorite(recipeId) {
@@ -86,6 +103,17 @@ export default function Layout() {
             const filteredNewItems = newItems.filter(newItem => 
                 !prevList.some(existingItem => existingItem.ingredient === newItem.ingredient)
             )
+            
+            // Show toast message
+            const addedCount = filteredNewItems.length
+            if (addedCount > 0) {
+                setToastMessage(`✅ Added ${addedCount} ingredient${addedCount > 1 ? 's' : ''} from "${recipeTitle}"`)
+                setTimeout(() => setToastMessage(''), 4000)
+            } else {
+                setToastMessage(`ℹ️ All ingredients from "${recipeTitle}" already in shopping list!`)
+                setTimeout(() => setToastMessage(''), 3000)
+            }
+            
             return [...prevList, ...filteredNewItems]
         })
     }
@@ -98,12 +126,25 @@ export default function Layout() {
         setShoppingList([])
     }
 
+    // Toast component
+    const Toast = ({ message, onClose }) => {
+        if (!message) return null
+        
+        return (
+            <div className="toast">
+                <span>{message}</span>
+                <button onClick={onClose} className="toast-close">×</button>
+            </div>
+        )
+    }
+
     const sharedData = {
         myIngredients,
         expandedIngredients,
         matchingRecipes,
         savedRecipes,
         shoppingList,
+        notFound,
         addItem,
         removeItem,
         handleFindRecipe,
@@ -111,6 +152,8 @@ export default function Layout() {
         addToShoppingList,
         removeFromShoppingList,
         clearShoppingList,
+        toastMessage,
+        setToastMessage
     }
 
     return (
@@ -121,6 +164,14 @@ export default function Layout() {
                 <Link to="/shopping-list">Shopping List ({shoppingList.length})</Link>
             </nav>
             <Outlet context={sharedData} />
+            <Toast 
+                message={toastMessage} 
+                onClose={() => setToastMessage('')} 
+            />
+            {/* <footer>
+                <Link to="shopping-list">Shopping List</Link>
+                <Link to="saved">Favorited Recipes</Link>
+            </footer> */}
         </div>
     )
 }

@@ -31,7 +31,6 @@ body {
 }
 
 .layout-container > nav {
-  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +40,25 @@ body {
 }
 
 .layout-container > nav > a {
+  width: 33%;
+  text-align: center;
   text-decoration: none;
+  font-size: 1.25rem;
+  color: black;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: .5em;
+  padding: .75em 1em;
+}
+
+.layout-container > nav > a:hover {
+  opacity: .8;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  column-gap: 2em;
 }
 
 .master {
@@ -163,7 +180,7 @@ body {
 }
 
 .ingredient > span:nth-child(2):hover {
-  opacity: .5;
+  opacity: .8;
 }
 
 #find-recipe-btn {
@@ -179,7 +196,7 @@ body {
 }
 
 #find-recipe-btn:hover {
-  opacity: .80;
+  opacity: .8;
 }
 
 .recipe-container {
@@ -191,7 +208,7 @@ body {
   width: 100%;
 }
 
-legend {
+.recipe-container > legend {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,7 +218,7 @@ legend {
   margin-top: 2em;
 }
 
-legend > span:nth-child(2) {
+.recipe-container > legend > span:nth-child(2) {
   margin: 0 3em;
 }
 
@@ -299,10 +316,7 @@ legend > span:nth-child(2) {
   align-items: center;
   justify-content: center;
   width: 50%;
-}
-
-.shopping-list-page > header > h1 {
-  margin-bottom: 0;
+  margin-bottom: 1.5em;
 }
 
 .shopping-list-actions {
@@ -336,4 +350,49 @@ legend > span:nth-child(2) {
 
 .red {
   color: red;
+}
+
+/* Toast Notification Styles */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 300px;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  line-height: 1;
+}
+
+.toast-close:hover {
+  opacity: 0.7;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
