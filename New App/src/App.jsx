@@ -67,7 +67,8 @@ NEW PSEUDO...
 TROY PSEUDO
 
 Decide on implementing ingredient units or not (make add input like the sleect input if not using units)✅
-fix shifting navbar UI
+add more recipes
+double check recipe card wrapping or not wrapping
 add media queries
 
   
