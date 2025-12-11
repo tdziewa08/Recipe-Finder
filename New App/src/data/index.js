@@ -1,6 +1,3 @@
-import {recipes} from "./recipes.js"
-import {substitutions} from "./substitutions.js"
-
 function subIngredients(ingredientArr, substitutionsObj) {
     const expandedIngredients = []
     

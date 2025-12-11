@@ -23,14 +23,12 @@ export default function Layout() {
     const [toastMessage, setToastMessage] = React.useState('')
     
 
-    function addItem(ingredient, amount, unit) {
-        if(ingredient && amount)
+    function addItem(ingredient) {
+        if(ingredient)
         {
             const newestItem = {
                 id: nanoid(),
-                ingredient: ingredient,
-                amount: amount,
-                unit: unit    
+                ingredient: ingredient.toLowerCase(),
             }
             const newestArray = [newestItem, ...myIngredients]
             setMyIngredients(newestArray)
@@ -63,6 +61,74 @@ export default function Layout() {
             setNotFound(false)
             setMatchingRecipes(foundRecipes)
         }
+    }
+
+    function filterRecipes(parameter) {
+        console.log(parameter)
+
+        let sortedArray = [...matchingRecipes] // Don't mutate original array
+
+        if(parameter === "cuisine")
+        {
+            console.log("cuisine")
+            // Group by cuisine, then sort within groups by cookTime and difficulty
+            const grouped = sortedArray.reduce((acc, recipe) => {
+                const cuisine = recipe.cuisine || 'Other'
+                if (!acc[cuisine]) acc[cuisine] = []
+                acc[cuisine].push(recipe)
+                return acc
+            }, {})
+            
+            // Sort each cuisine group by cookTime, then difficulty
+            Object.keys(grouped).forEach(cuisine => {
+                grouped[cuisine].sort((a, b) => {
+                    // First by cookTime
+                    if (a.cookTime !== b.cookTime) return a.cookTime - b.cookTime
+                    
+                    // Then by difficulty
+                    const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 }
+                    const diffA = difficultyOrder[a.difficulty] || 4
+                    const diffB = difficultyOrder[b.difficulty] || 4
+                    return diffA - diffB
+                })
+            })
+            
+            // Flatten back to array with cuisines in alphabetical order
+            sortedArray = Object.keys(grouped)
+                .sort()
+                .flatMap(cuisine => grouped[cuisine])
+        }
+        else if(parameter === "difficulty")
+        {
+            console.log("difficulty")
+            const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 }
+            sortedArray.sort((a, b) => {
+                const diffA = difficultyOrder[a.difficulty] || 4
+                const diffB = difficultyOrder[b.difficulty] || 4
+                
+                // First by difficulty
+                if (diffA !== diffB) return diffA - diffB
+                
+                // Then by cookTime for ties
+                return a.cookTime - b.cookTime
+            })
+        }
+        else if(parameter === "cook-time")
+        {
+            console.log("cook time")
+            sortedArray.sort((a, b) => {
+                // First by cookTime
+                if (a.cookTime !== b.cookTime) return a.cookTime - b.cookTime
+                
+                // Then by difficulty for ties
+                const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 }
+                const diffA = difficultyOrder[a.difficulty] || 4
+                const diffB = difficultyOrder[b.difficulty] || 4
+                return diffA - diffB
+            })
+        }
+        
+        setMatchingRecipes(sortedArray)
     }
 
     function toggleFavorite(recipeId) {
@@ -148,6 +214,7 @@ export default function Layout() {
         addItem,
         removeItem,
         handleFindRecipe,
+        filterRecipes,
         toggleFavorite,
         addToShoppingList,
         removeFromShoppingList,

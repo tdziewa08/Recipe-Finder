@@ -22,11 +22,11 @@ export default function SavedRecipesList(props) {
             
             {savedRecipes && savedRecipes.length > 0 ? (
                 <div className="recipe-container">
-                    <legend>
+                    <div className="recipe-key">
                         <span>🔴 Missing ingredient</span>
                         <span>🔵 Substitute available</span> 
                         <span>⚫ Have ingredient</span>
-                    </legend>
+                    </div>
                     <>
                         <RecipeCard 
                             recipes={savedRecipes}

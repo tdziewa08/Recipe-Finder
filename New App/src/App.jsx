@@ -66,7 +66,7 @@ NEW PSEUDO...
 
 TROY PSEUDO
 
-Decide on implementing ingredient units or not (make add input like the sleect input if not using units)
+Decide on implementing ingredient units or not (make add input like the sleect input if not using units)✅
 fix shifting navbar UI
 add media queries
 

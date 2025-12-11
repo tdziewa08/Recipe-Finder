@@ -17,8 +17,6 @@ export default function Home() {
 
     //local state/////////////////////////////////////////////////////////////
     const [ingredient, setIngredient] = React.useState("")
-    const [amount, setAmount] = React.useState("")
-    const [unit, setUnit] = React.useState("cups")
     //////////////////////////////////////////////////////////////////////////
 
     const {
@@ -26,69 +24,29 @@ export default function Home() {
         expandedIngredients,
         matchingRecipes,
         savedRecipes,
-        shoppingList,
         notFound,
         addItem,
         removeItem,
         handleFindRecipe,
+        filterRecipes,
         toggleFavorite,
         addToShoppingList,
-        removeFromShoppingList,
-        clearShoppingList,
     } = useOutletContext()
 
     //local function that calls context addItem and resets form
     function handleAddItem() {
-        const success = addItem(ingredient, amount, unit)
+        const success = addItem(ingredient)
         if (success) {
             setIngredient("")
-            setAmount("")
-            setUnit("cups")
         }
-    }
-
-
-
-
-    // function removeItem(id) {
-    //     const newIngredients = myIngredients.filter(item => item.id !== id)
-    //     setMyIngredients(newIngredients)
-        
-    //     // Recalculate expanded ingredients with the updated ingredients list
-    //     const updatedExpandedIngredients = subIngredients(newIngredients, substitutions)
-    //     setExpandedIngredients(updatedExpandedIngredients)
-    // }
-
-    // function handleFindRecipe() {
-    //     console.log("inside handleFindRecipe function")
-    //     const foundRecipes = findRecipe(myIngredients, recipes, substitutions)
-    //     setMatchingRecipes(foundRecipes)
-    // }
-
-    // function toggleFavorite(recipeId) {
-    //     setMatchingRecipes(prevRecipes => {
-    //         const updatedRecipes = prevRecipes.map(recipe => {
-    //             return (
-    //                 recipe.id === recipeId 
-    //                     ? {...recipe, isFavorite: !recipe.isFavorite}
-    //                     : recipe
-    //         )})
-    //         const favoritedRecipes = updatedRecipes.filter(recipe => recipe.isFavorite)
-    //         setSavedRecipes(favoritedRecipes)
-    //         return updatedRecipes
-    //     })
-    // }
-    
-
-    console.log("My Ingredients" + myIngredients)
-    console.log("Expanded Ingredients" + expandedIngredients)
+    }    
 
     return (
         <>
-            <div className="master">
+            <div className="main-container">
                 <div className="home-container">
-                    <h1>Recipe Optimitzer</h1>
-                    <p className="app-desc">Let us know what ingredients you have, and we'll generate the best recipe we can to fit YOUR goals!</p>
+                    <h1>Recipe Finder</h1>
+                    <p className="app-desc">Enter your ingredients and find a recipe</p>
                     <div className="ingredient-input-container">
                         <div className="input-section">
                             <div className="ingredient-input">
@@ -96,31 +54,15 @@ export default function Home() {
                                 <input
                                     value={ingredient}
                                     onChange={(e) => setIngredient(e.target.value)}
+                                    onKeyDown={(e) => e.key === "Enter" && handleAddItem()}
                                     type="text"
                                     placeholder="E.g Broccoli"
                                 />
-                            </div>
-                            <div className="ingredient-input">
-                                <span>Amount</span>
-                                <input
-                                    value={amount}
-                                    onChange={(e) => setAmount(e.target.value)}
-                                    type="text"
-                                    placeholder="E.g 4"
-                                />
-                                <select value={unit} onChange={(e) => setUnit(e.target.value)}>
-                                    <option value="cups" selected>cups</option>
-                                    <option value="oz" >oz</option>
-                                    <option value="fl oz" >fl oz</option>
-                                    <option value="grams" >grams</option>
-                                    <option value="pounds" >pounds</option>
-                                    <option value="units" >units</option>
-                                    <option value="teaspoons" >teaspoons</option>
-                                    <option value="tablespoons" >tablespoons</option>
-                                </select>
+                                <button id="add-item-btn" onClick={handleAddItem}>
+                                    Add
+                                </button>
                             </div>
                         </div>
-                        <button onClick={handleAddItem}>Add Item</button>
                     </div>
                 </div>
                 <IngredientList
@@ -132,11 +74,17 @@ export default function Home() {
             </div>
             {matchingRecipes.length > 0 &&
             <div className="recipe-container">
-                <legend>
+                <div className="recipe-filter-btns">
+                    Sort By: 
+                    <button value="cuisine" onClick={(e) => filterRecipes(e.target.value)}>Cuisine</button>
+                    <button value="difficulty" onClick={(e) => filterRecipes(e.target.value)}>Difficulty</button>
+                    <button value="cook-time" onClick={(e) => filterRecipes(e.target.value)}>Cook Time</button>
+                </div>
+                <div className="recipe-key">
                     <span>🔴 Missing ingredient</span>
                     <span>🔵 Substitute available</span> 
                     <span>⚫ Have ingredient</span>
-                </legend>
+                </div>
                 <>
                     <RecipeCard 
                         recipes={matchingRecipes}
@@ -153,3 +101,28 @@ export default function Home() {
         </>
     )
 }
+
+
+
+
+
+
+{/* <div className="ingredient-input">
+    <span>Amount</span>
+    <input
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        type="text"
+        placeholder="E.g 4"
+    />
+    <select value={unit} onChange={(e) => setUnit(e.target.value)}>
+        <option value="cups" selected>cups</option>
+        <option value="oz" >oz</option>
+        <option value="fl oz" >fl oz</option>
+        <option value="grams" >grams</option>
+        <option value="pounds" >pounds</option>
+        <option value="units" >units</option>
+        <option value="teaspoons" >teaspoons</option>
+        <option value="tablespoons" >tablespoons</option>
+    </select>
+</div> */}
