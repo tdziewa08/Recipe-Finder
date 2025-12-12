@@ -33,17 +33,14 @@ export default function RecipeCard(props) {
 
                         if(hasIngredient)
                         {
-                            // console.log("On the List")
                             return <span key={index}>{ing}{index < item.ingredients.length - 1 ? ', ' : ''}</span>
                         }
                         else if(props.allIngredients.includes(ing))
                         {
-                            // console.log("Substitute on List")
                             return <span className="blue" key={index}>{ing}{index < item.ingredients.length - 1 ? ', ' : ''}</span>
                         }
                         else
                         {
-                            // console.log("Its not on either and should be red")
                             return <span className="red" key={index}>{ing}{index < item.ingredients.length - 1 ? ', ' : ''}</span>
                         }
                     })}
@@ -59,7 +56,7 @@ export default function RecipeCard(props) {
                 <button 
                     id="shopping-list-btn"
                     onClick={() => {
-                        if (props.onAddToShoppingList && missingIngredients.length > 0)
+                        if(props.onAddToShoppingList && missingIngredients.length > 0)
                         {
                             props.onAddToShoppingList(missingIngredients, item.title)
                         }

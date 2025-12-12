@@ -23,7 +23,6 @@ button:hover {
 }
 
 #root {
-  /* border: 2px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +30,6 @@ button:hover {
 }
 
 .layout-container {
-  /* border: 1px solid purple; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,17 +59,15 @@ button:hover {
 }
 
 .main-container {
-  /* border: 2px solid blue; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 50%;
-  margin: 0 auto; /* Centers the container horizontally */
+  margin: 0 auto;
 }
 
 .home-container {
-  /* border: 1px solid magenta; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,7 +158,6 @@ button:hover {
   color: rgb(199, 15, 15);
   font-size: small;
   font-style: italic;
-  /* margin-left: 5em; */
   cursor: pointer;
 }
 
@@ -183,7 +178,6 @@ button:hover {
 }
 
 .recipe-container {
-  /* border: 1px solid brown; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,7 +186,6 @@ button:hover {
 }
 
 .recipe-filter-btns {
-  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,8 +205,6 @@ button:hover {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  /* background-color: whitesmoke;
-  padding: 1em; */
   margin-top: 2em;
 }
 
@@ -226,8 +217,9 @@ button:hover {
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   margin-block: 2em;
+  row-gap: 1em;
   column-gap: 1em;
 }
 
@@ -238,7 +230,8 @@ button:hover {
   align-items: flex-start;
   justify-content: flex-start;
   height: auto;
-  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
   background-color: rgb(248, 241, 230);
   padding: 1em;
 }
@@ -290,9 +283,6 @@ button:hover {
   padding: .5em 1em;
 }
 
-
-
-
 .saved-recipes-page {
   display: flex;
   flex-direction: column;
@@ -338,18 +328,6 @@ button:hover {
   justify-content: center;
 }
 
-
-
-
-.blue {
-  color: blue;
-}
-
-.red {
-  color: red;
-}
-
-/* Toast Notification Styles */
 .toast {
   position: fixed;
   top: 20px;
@@ -394,14 +372,263 @@ button:hover {
   }
 }
 
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+/* Screen media queries */
+
+/* 720p (HD) - 1280x720 */
+@media screen and (min-width: 1280px) and (max-width: 1439px) {
+
+  .layout-container > nav > a {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .app-desc {
+    font-size: 1rem;
+  }
+
+  .ingredient-input > span {
+    font-size: 1rem;
+  }
+
+  .ingredient-input > input {
+    font-size: .8rem;
+  }
+
+  #add-item-btn {
+    font-size: .8rem;
+  }
+
+  .ingredient {
+    font-size: .8rem;
+  }
+
+  .ingredient > span:nth-child(2) {
+    font-size: .8rem;
+  }
+
+  .ingredient > span:nth-child(2):hover {
+    opacity: .8;
+  }
+
+  #find-recipe-btn {
+    font-size: 1rem;
+  }
+
+  .recipe-filter-btns {
+    width: 100%;
+    font-size: .8rem;
+  }
+
+  .recipe-filter-btns > button {
+    font-size: .8rem;
+  }
+
+  .recipe-key {
+    font-size: 1rem;
+  }
+
+  .recipe-key > span:nth-child(2) {
+    margin: 0 3em;
+  }
+
+  .recipe-card {
+    min-width: 350px;
+    max-width: 350px;
+  }
+
+  .recipe-card > h3 {
+    font-size: 1.25rem;
+  }
+
+  .recipe-card > p {
+    font-size: 1rem;
+  }
+
+  .recipe-tags {
+    font-size: 1rem;
+  }
+
+  .ingredients-list > p {
+    font-size: 1rem;
+  }
+
+  .ingredients-list > span {
+    font-size: 1rem;
+  }
+
+  .instructions-list > p {
+    font-size: 1rem;
+  }
+
+  .instructions-list > p:nth-child(1) {
+    font-weight: bold;
+  }
+
+  #shopping-list-btn {
+    font-size: .9rem;
+  }
+
+  .no-saved-recipes {
+    font-size: 1rem;
+  }
+
+  .shopping-list-page {
+    font-size: 1rem;
+  }
+
+  .shopping-list-actions > button {
+    font-size: .8rem;
+  }
+
+  .no-shopping-items > h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* 1440p (QHD/2K) - 2560x1440 */
+@media screen and (min-width: 2560px) {
+
+  .layout-container > nav > a {
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .app-desc {
+    font-size: 1.25rem;
+  }
+
+  .ingredient-input > span {
+    font-size: 1.5rem;
+    margin-right: .5em;
+  }
+
+  .ingredient-input > input {
+    font-size: 1rem;
+  }
+
+  #add-item-btn {
+    font-size: 1rem;
+  }
+
+  .ingredient {
+    font-size: 1.25rem;
+  }
+
+  .ingredient > span:nth-child(2) {
+    font-size: 1.25rem;
+  }
+
+  .ingredient > span:nth-child(2):hover {
+    opacity: .8;
+  }
+
+  #find-recipe-btn {
+    font-size: 1.25rem;
+  }
+
+  .recipe-filter-btns {
+    font-size: 1.25rem;
+  }
+
+  .recipe-filter-btns > button {
+    font-size: 1.1rem;
+  }
+
+  .recipe-key {
+    font-size: 1.25rem;
+  }
+
+  .recipe-key > span:nth-child(2) {
+    margin: 0 3em;
+  }
+
+  .recipe-card {
+    min-width: 450px;
+    max-width: 450px;
+  }
+
+  .recipe-card > h3 {
+    font-size: 1.5rem;
+  }
+
+  .recipe-card > p {
+    font-size: 1.25rem;
+  }
+
+  .recipe-tags {
+    font-size: 1.25rem;
+  }
+
+  .ingredients-list > p {
+    font-size: 1.25rem;
+  }
+
+  .ingredients-list > span {
+    font-size: 1.25rem;
+    font-style: italic;
+  }
+
+  .instructions-list > p {
+    font-size: 1.25rem;
+  }
+
+  .instructions-list > p:nth-child(1) {
+    font-weight: bold;
+  }
+
+  #shopping-list-btn {
+    font-size: 1.1rem;
+  }
+
+  .no-saved-recipes {
+    font-size: 1.25rem;
+  }
+
+  .shopping-list-page {
+    font-size: 1.25rem;
+  }
+
+  .shopping-list-actions > button {
+    font-size: 1.1rem;
+  }
+
+  .no-shopping-items > h2 {
+    font-size: 1.75rem;
+  }
+}
 
 
 
 
 
 
-/* .ingredient-input:nth-child(2) > input {
-  border-radius: .5em 0 0 .5em;
+/* 
+  Code for if I would like to implement ingredient amounts later on...
+
+  .ingredient-input:nth-child(2) > input {
+    border-radius: .5em 0 0 .5em;
 } */
 
 /* .ingredient-input > select {

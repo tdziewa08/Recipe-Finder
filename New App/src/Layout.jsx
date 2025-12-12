@@ -1,8 +1,7 @@
 import React from "react"
 import { Outlet, Link, useLocation } from "react-router-dom"
 import { nanoid } from "nanoid"
-import { findRecipe } from "./data/index.js"
-import { subIngredients } from "./data/index.js"
+import { findRecipe, subIngredients } from "./utils/recipeHelpers.js"
 import { recipes } from "./data/recipes.js"
 import { substitutions } from "./data/substitutions.js"
 
@@ -49,7 +48,6 @@ export default function Layout() {
     }
 
     function handleFindRecipe() {
-        console.log("inside handleFindRecipe function")
         const foundRecipes = findRecipe(myIngredients, recipes, substitutions)
         if(foundRecipes.length === 0)
         {
@@ -64,17 +62,21 @@ export default function Layout() {
     }
 
     function filterRecipes(parameter) {
-        console.log(parameter)
 
-        let sortedArray = [...matchingRecipes] // Don't mutate original array
+        // Determine which array to sort based on current route
+        const isOnSavedPage = location.pathname === '/saved'
+        const sourceArray = isOnSavedPage ? savedRecipes : matchingRecipes
+        let sortedArray = [...sourceArray] // Don't mutate original array
 
         if(parameter === "cuisine")
         {
-            console.log("cuisine")
             // Group by cuisine, then sort within groups by cookTime and difficulty
             const grouped = sortedArray.reduce((acc, recipe) => {
                 const cuisine = recipe.cuisine || 'Other'
-                if (!acc[cuisine]) acc[cuisine] = []
+                if(!acc[cuisine])
+                {
+                    acc[cuisine] = []
+                } 
                 acc[cuisine].push(recipe)
                 return acc
             }, {})
@@ -83,7 +85,10 @@ export default function Layout() {
             Object.keys(grouped).forEach(cuisine => {
                 grouped[cuisine].sort((a, b) => {
                     // First by cookTime
-                    if (a.cookTime !== b.cookTime) return a.cookTime - b.cookTime
+                    if(a.cookTime !== b.cookTime)
+                    {
+                        return a.cookTime - b.cookTime
+                    }
                     
                     // Then by difficulty
                     const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 }
@@ -100,14 +105,16 @@ export default function Layout() {
         }
         else if(parameter === "difficulty")
         {
-            console.log("difficulty")
             const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 }
             sortedArray.sort((a, b) => {
                 const diffA = difficultyOrder[a.difficulty] || 4
                 const diffB = difficultyOrder[b.difficulty] || 4
                 
                 // First by difficulty
-                if (diffA !== diffB) return diffA - diffB
+                if(diffA !== diffB)
+                {
+                    return diffA - diffB
+                }
                 
                 // Then by cookTime for ties
                 return a.cookTime - b.cookTime
@@ -115,10 +122,12 @@ export default function Layout() {
         }
         else if(parameter === "cook-time")
         {
-            console.log("cook time")
             sortedArray.sort((a, b) => {
                 // First by cookTime
-                if (a.cookTime !== b.cookTime) return a.cookTime - b.cookTime
+                if(a.cookTime !== b.cookTime)
+                {
+                    return a.cookTime - b.cookTime
+                }
                 
                 // Then by difficulty for ties
                 const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 }
@@ -128,20 +137,32 @@ export default function Layout() {
             })
         }
         
-        setMatchingRecipes(sortedArray)
+        // Update the appropriate state based on which page called the function
+        if (isOnSavedPage)
+        {
+            setSavedRecipes(sortedArray)
+        }
+        else
+        {
+            setMatchingRecipes(sortedArray)
+        }
     }
 
     function toggleFavorite(recipeId) {
         // Find if recipe is currently in savedRecipes
         const isCurrentlySaved = savedRecipes.some(recipe => recipe.id === recipeId)
         
-        if (isCurrentlySaved) {
+        if(isCurrentlySaved)
+        {
             // Remove from savedRecipes
             setSavedRecipes(prevSaved => prevSaved.filter(recipe => recipe.id !== recipeId))
-        } else {
+        }
+        else
+        {
             // Find the recipe from the original recipes data and add to savedRecipes
             const recipeToAdd = recipes.find(recipe => recipe.id === recipeId)
-            if (recipeToAdd) {
+            if(recipeToAdd)
+            {
                 setSavedRecipes(prevSaved => [...prevSaved, recipeToAdd])
             }
         }
@@ -172,10 +193,13 @@ export default function Layout() {
             
             // Show toast message
             const addedCount = filteredNewItems.length
-            if (addedCount > 0) {
+            if(addedCount > 0)
+            {
                 setToastMessage(`✅ Added ${addedCount} ingredient${addedCount > 1 ? 's' : ''} from "${recipeTitle}"`)
                 setTimeout(() => setToastMessage(''), 4000)
-            } else {
+            }
+            else
+            {
                 setToastMessage(`ℹ️ All ingredients from "${recipeTitle}" already in shopping list!`)
                 setTimeout(() => setToastMessage(''), 3000)
             }
@@ -192,9 +216,18 @@ export default function Layout() {
         setShoppingList([])
     }
 
+    function addCustomItemToShoppingList(newItem) {
+        setShoppingList(prevList => [...prevList, newItem])
+        setToastMessage(`✅ Added "${newItem.ingredient}" to shopping list`)
+        setTimeout(() => setToastMessage(''), 3000)
+    }
+
     // Toast component
     const Toast = ({ message, onClose }) => {
-        if (!message) return null
+        if(!message)
+        {
+            return null
+        }
         
         return (
             <div className="toast">
@@ -219,6 +252,7 @@ export default function Layout() {
         addToShoppingList,
         removeFromShoppingList,
         clearShoppingList,
+        addCustomItemToShoppingList,
         toastMessage,
         setToastMessage
     }
@@ -235,10 +269,6 @@ export default function Layout() {
                 message={toastMessage} 
                 onClose={() => setToastMessage('')} 
             />
-            {/* <footer>
-                <Link to="shopping-list">Shopping List</Link>
-                <Link to="saved">Favorited Recipes</Link>
-            </footer> */}
         </div>
     )
 }

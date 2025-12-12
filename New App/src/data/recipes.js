@@ -64,5 +64,49 @@ export const recipes = [
         cuisine: "Mediterranean",
         difficulty: "Easy",
         isFavorite: false
+    },
+    {
+        id: 7,
+        title: "Vegetable Fried Rice",
+        ingredients: ["rice", "vegetables", "soy sauce", "garlic", "ginger", "oil", "eggs"],
+        instructions: ["Cook rice and let cool", "Heat oil in large pan", "Scramble eggs and set aside", "Stir fry vegetables with garlic and ginger", "Add rice and soy sauce", "Mix in scrambled eggs"],
+        cookTime: 18,
+        servings: 4,
+        cuisine: "Asian",
+        difficulty: "Medium",
+        isFavorite: false
+    },
+    {
+        id: 8,
+        title: "Margherita Pizza",
+        ingredients: ["pizza dough", "tomato sauce", "mozzarella", "basil", "olive oil"],
+        instructions: ["Preheat oven to 475°F", "Roll out pizza dough", "Spread tomato sauce evenly", "Add mozzarella cheese", "Bake for 12-15 minutes", "Top with fresh basil and olive oil"],
+        cookTime: 30,
+        servings: 2,
+        cuisine: "Italian",
+        difficulty: "Medium",
+        isFavorite: false
+    },
+    {
+        id: 9,
+        title: "Fish Tacos",
+        ingredients: ["white fish", "tortillas", "cabbage", "lime", "cilantro", "avocado", "oil"],
+        instructions: ["Season and pan-fry fish until flaky", "Warm tortillas", "Shred cabbage finely", "Slice avocado", "Assemble tacos with fish, cabbage, and avocado", "Garnish with cilantro and lime"],
+        cookTime: 22,
+        servings: 3,
+        cuisine: "Mexican",
+        difficulty: "Medium",
+        isFavorite: false
+    },
+    {
+        id: 10,
+        title: "Chicken Caesar Salad",
+        ingredients: ["chicken breast", "lettuce", "parmesan", "croutons", "caesar dressing", "oil"],
+        instructions: ["Season and grill chicken breast", "Chop lettuce into bite-sized pieces", "Slice grilled chicken", "Toss lettuce with caesar dressing", "Top with chicken, parmesan, and croutons"],
+        cookTime: 16,
+        servings: 2,
+        cuisine: "American",
+        difficulty: "Easy",
+        isFavorite: false
     }
 ]

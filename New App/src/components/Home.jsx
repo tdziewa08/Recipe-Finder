@@ -1,23 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { useOutletContext } from "react-router-dom"
-import { nanoid } from "nanoid"
 import IngredientList from "./IngredientList"
-import { subIngredients } from "../data/index.js"
 import RecipeCard from "./RecipeCard"
 
-import SavedRecipesList from "./SavedRecipesList"
 
 export default function Home() {
 
-    //const [myIngredients, setMyIngredients] = React.useState([])
-    //const [matchingRecipes, setMatchingRecipes] = React.useState([])
-    //const [savedRecipes, setSavedRecipes] = React.useState([])
-    //const [expandedIngredients, setExpandedIngredients] = React.useState([])
-
-    //local state/////////////////////////////////////////////////////////////
+    //local state
     const [ingredient, setIngredient] = React.useState("")
-    //////////////////////////////////////////////////////////////////////////
 
     const {
         myIngredients,
@@ -36,7 +26,8 @@ export default function Home() {
     //local function that calls context addItem and resets form
     function handleAddItem() {
         const success = addItem(ingredient)
-        if (success) {
+        if(success)
+        {
             setIngredient("")
         }
     }    
@@ -96,8 +87,6 @@ export default function Home() {
                     />
                 </>
             </div>}
-            
-
         </>
     )
 }
@@ -107,7 +96,11 @@ export default function Home() {
 
 
 
-{/* <div className="ingredient-input">
+{/* 
+    Code for if I would like to implement ingredient amounts later on...
+    
+    
+    <div className="ingredient-input">
     <span>Amount</span>
     <input
         value={amount}

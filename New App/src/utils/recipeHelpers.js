@@ -9,13 +9,13 @@ function subIngredients(ingredientArr, substitutionsObj) {
         
         // Add all substitutes to expanded list
         allSubstitutes.forEach(sub => {
-            if (!expandedIngredients.includes(sub)) {
+            if(!expandedIngredients.includes(sub))
+            {
                 expandedIngredients.push(sub)
             }
         })
     })
     
-    console.log(expandedIngredients)
     return expandedIngredients
 }
 
@@ -24,13 +24,15 @@ function findAllSubstitutes(ingredient, substitutionsObj) {
     let allSubs = [ingredient] // Include original ingredient
     
     // Find direct substitutes (ingredient -> substitutes)
-    if (substitutionsObj[ingredient]) {
+    if(substitutionsObj[ingredient])
+    {
         allSubs.push(...substitutionsObj[ingredient])
     }
     
     // Find reverse substitutes (what this ingredient can substitute for)
     Object.entries(substitutionsObj).forEach(([key, values]) => {
-        if (values.includes(ingredient)) {
+        if(values.includes(ingredient))
+        {
             allSubs.push(key) // Only add the key ingredient, not all its substitutes
         }
     })
@@ -50,7 +52,6 @@ function findRecipe(ingredientArr, recipeArr, substitutionsObj) {
         })
     })
 
-    console.log("Matching recipes:", matchingRecipes)
     return matchingRecipes
 }
 
